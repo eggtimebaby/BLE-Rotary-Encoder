@@ -1,6 +1,6 @@
-# ESP32 BLE Encoder Control
+# ESP32 BLE Dual Encoder Control
 
-An enhanced Bluetooth LE keyboard controller using a rotary encoder with the ESP32-C3 microcontroller. This project turns a rotary encoder into a wireless keyboard that sends arrow key presses and enter key commands.
+An enhanced Bluetooth LE keyboard and mouse controller using dual rotary encoders with the ESP32-C3 microcontroller. This project creates a wireless interface with two encoders and multiple buttons for navigation, media control, and mouse functionality.
 
 ## Current Status
 
@@ -8,24 +8,42 @@ This project is under active development. The current version works with USB pow
 
 ## Features
 
-- **Robust BLE Connection Handling**: Improved connection management with automatic reconnection
-- **Enhanced Debouncing**: Proper debouncing for both encoder rotation and button presses
+### Dual Encoder Support
+- **First Encoder**: Left/Right arrow keys with Enter button
+- **Second Encoder**: Up/Down arrow keys with Command (Mac) button
+
+### Enhanced Functionality
+- **Robust BLE Connection**: Improved connection management with automatic reconnection
+- **Advanced Debouncing**: Proper debouncing for both encoder rotation and button presses
 - **Visual Feedback**: RGB LED status indicator for connection state and activity
+- **Independent State Tracking**: Separate state management for each encoder
 
 ## Hardware Requirements
 
 - ESP32-C3 development board
-- Rotary encoder with push button
+- 2× Rotary encoders with push buttons
 - WS2812 RGB LED (NeoPixel)
 
 ## Wiring
 
+### First Encoder (Left/Right + Enter)
 | Component | ESP32-C3 Pin |
 |-----------|--------------|
-| Encoder CLK | GPIO 2 |
-| Encoder DT | GPIO 1 |
-| Encoder SW (Button) | GPIO 0 |
-| RGB LED Data | GPIO 10 |
+| CLK | GPIO 2 |
+| DT | GPIO 1 |
+| SW (Button) | GPIO 0 |
+
+### Second Encoder (Up/Down + Command)
+| Component | ESP32-C3 Pin |
+|-----------|--------------|
+| CLK | GPIO 6 |
+| DT | GPIO 7 |
+| SW (Button) | GPIO 8 |
+
+### LED
+| Component | ESP32-C3 Pin |
+|-----------|--------------|
+| Data | GPIO 10 |
 
 ## Dependencies
 
@@ -64,8 +82,11 @@ This project is under active development. The current version works with USB pow
 2. Connect the hardware according to the wiring table
 3. Upload the sketch to your ESP32-C3
 4. Pair with your computer or mobile device
-5. Use the rotary encoder to send left/right arrow keys
-6. Press the encoder button to send Enter key
+5. Use the encoders:
+   - First encoder: Left/Right navigation
+   - First button: Enter key
+   - Second encoder: Up/Down navigation
+   - Second button: Command key (Mac)
 
 ## Troubleshooting
 
@@ -95,13 +116,30 @@ This project is under active development. The current version works with USB pow
 - Consider adding acceleration for fast encoder rotation
 
 ### Hardware Improvements
+- Add 0.96" OLED display for:
+  * Connection status
+  * Battery level
+  * Current mode (keyboard/mouse)
+  * Active settings
+- Add 3-4 programmable buttons for:
+  * Mouse buttons (left, right, middle click)
+  * Mode switching
+  * Custom macros
 - Design custom PCB for more compact form factor
 - Add battery charging circuit
-- Consider adding additional buttons for more functions
-- Explore using magnetic encoder for better feel
-- Add optional OLED display for status information
+- Explore using magnetic encoders for better feel
 
 ### Software Improvements
+- Add mouse functionality:
+  * Use buttons for mouse clicks
+  * Optional encoder-to-mouse-movement mode
+  * Adjustable mouse speed/sensitivity
+  * Scroll wheel emulation
+- Add OLED display support:
+  * Status information
+  * Settings menu
+  * Battery monitoring
+  * Connection details
 - Add OTA (Over-The-Air) firmware updates
 - Implement configuration storage in flash memory
 - Add diagnostic mode for troubleshooting
