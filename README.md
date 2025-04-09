@@ -1,6 +1,6 @@
-# ESP32 BLE Dual Encoder Control
+# ESP32 BLE Jog/Scrub Controller
 
-An enhanced Bluetooth LE keyboard and mouse controller using dual rotary encoders with the ESP32-C3 microcontroller. This project creates a wireless interface with two encoders and multiple buttons for navigation, media control, and mouse functionality.
+An enhanced Bluetooth LE controller using dual rotary encoders with the ESP32-C3 microcontroller. This project creates a wireless jog/scrub controller for video and audio editing, featuring simultaneous keyboard and mouse functionality for precise timeline control and editing operations.
 
 ## Current Status
 
@@ -9,8 +9,8 @@ This project is under active development. The current version works with USB pow
 ## Features
 
 ### Dual Encoder Support
-- **First Encoder**: Left/Right arrow keys with Enter button
-- **Second Encoder**: Up/Down arrow keys with Command (Mac) button
+- **First Encoder**: Timeline scrubbing with Left/Right arrow keys and Enter
+- **Second Encoder**: Vertical navigation/zoom with Up/Down arrows and Command
 
 ### Enhanced Functionality
 - **Robust BLE Connection**: Improved connection management with automatic reconnection
@@ -26,14 +26,14 @@ This project is under active development. The current version works with USB pow
 
 ## Wiring
 
-### First Encoder (Left/Right + Enter)
+### First Encoder (Timeline Scrubbing)
 | Component | ESP32-C3 Pin |
 |-----------|--------------|
 | CLK | GPIO 2 |
 | DT | GPIO 1 |
 | SW (Button) | GPIO 0 |
 
-### Second Encoder (Up/Down + Command)
+### Second Encoder (Vertical Navigation/Zoom)
 | Component | ESP32-C3 Pin |
 |-----------|--------------|
 | CLK | GPIO 6 |
@@ -83,10 +83,10 @@ This project is under active development. The current version works with USB pow
 3. Upload the sketch to your ESP32-C3
 4. Pair with your computer or mobile device
 5. Use the encoders:
-   - First encoder: Left/Right navigation
-   - First button: Enter key
-   - Second encoder: Up/Down navigation
-   - Second button: Command key (Mac)
+   - First encoder: Timeline scrubbing (Left/Right)
+   - First button: Enter/Play-Pause
+   - Second encoder: Vertical navigation/zoom
+   - Second button: Command key for modifiers
 
 ## Troubleshooting
 
@@ -109,37 +109,38 @@ This project is under active development. The current version works with USB pow
 - Optimize power consumption during active use
 
 ### Feature Enhancements
-- Add configurable key mappings
-- Support for long-press and double-click actions
-- Add configuration mode for settings adjustment
-- Add macro support for common key combinations
-- Consider adding acceleration for fast encoder rotation
+- Add configurable jog/scrub sensitivity
+- Support for variable speed scrubbing
+- Add fine-control modifier combinations
+- Add macro support for common editing operations
+- Implement acceleration for fast timeline navigation
 
 ### Hardware Improvements
 - Add 0.96" OLED display for:
-  * Connection status
-  * Battery level
-  * Current mode (keyboard/mouse)
-  * Active settings
+  * Timeline position/markers
+  * Current jog speed/direction
+  * Active modifiers/functions
+  * Battery and connection status
 - Add 3-4 programmable buttons for:
-  * Mouse buttons (left, right, middle click)
-  * Mode switching
-  * Custom macros
+  * Mouse buttons for editing operations
+  * Transport controls (play/pause, stop)
+  * Modifier keys (shift, alt, etc.)
+  * Custom editing macros
 - Design custom PCB for more compact form factor
 - Add battery charging circuit
-- Explore using magnetic encoders for better feel
+- Explore using magnetic encoders for better tactile feedback
 
 ### Software Improvements
-- Add mouse functionality:
-  * Use buttons for mouse clicks
-  * Optional encoder-to-mouse-movement mode
-  * Adjustable mouse speed/sensitivity
-  * Scroll wheel emulation
+- Integrate simultaneous keyboard and mouse functionality:
+  * Encoder-based timeline scrubbing
+  * Fine control with modifier keys
+  * Mouse buttons for editing operations
+  * Customizable jog speeds
 - Add OLED display support:
-  * Status information
-  * Settings menu
-  * Battery monitoring
-  * Connection details
+  * Timeline position/zoom level
+  * Current jog speed/sensitivity
+  * Active modifiers/functions
+  * Battery and connection status
 - Add OTA (Over-The-Air) firmware updates
 - Implement configuration storage in flash memory
 - Add diagnostic mode for troubleshooting
